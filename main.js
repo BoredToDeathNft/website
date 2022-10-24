@@ -164,7 +164,7 @@ const connect_wallet = async() =>
     window.metamask_signer = metamask_provider.getSigner();
 
     // Connect to the contract with metamask so its writable
-    window.btd_contract = new ethers.Contract("0x228550C26fD6afDc7C0f6F9e93672ea973bC5331", abi, window.metamask_signer);
+    window.btd_contract = new ethers.Contract("0xDC99B8FF05579D09759ccd69cBb876796987a99B", abi, window.metamask_signer);
 
     // Set how many tokens the user already holds
     get_display_balance()
