@@ -140,18 +140,18 @@ const mint = async(e) =>
     console.log('merkle_proof: ',merkle_proof , typeof(merkle_proof));
 
     // Try mint the token
-    try
-    {
+    // try
+    // {
         // If successful then just console log it
         let output = await window.btd_contract.whiteListMint(amount, merkle_proof, {value: price});
         console.log('output: ',output , typeof(output));
-    }
-    catch
-    {
+    // }
+    // catch
+    // {
         // If not successful then alert it
-        alert("Something went wrong!")
-        console.log('output: ',output , typeof(output));
-    }
+        // alert("Something went wrong!")
+        // console.log('output: ',output , typeof(output));
+    // }
 }
 
 // Handle the "Connect Wallet" button.
