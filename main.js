@@ -140,18 +140,17 @@ const mint = async(e) =>
     console.log('merkle_proof: ',merkle_proof , typeof(merkle_proof));
 
     // Try mint the token
-    // try
-    // {
+    try
+    {
         // If successful then just console log it
         let output = await window.btd_contract.whiteListMint(amount, merkle_proof, {value: price});
         console.log('output: ',output , typeof(output));
-    // }
-    // catch
-    // {
+    }
+    catch
+    {
         // If not successful then alert it
-        // alert("Something went wrong!")
-        // console.log('output: ',output , typeof(output));
-    // }
+        alert("Something went wrong!")
+    }
 }
 
 // Handle the "Connect Wallet" button.
@@ -164,7 +163,7 @@ const connect_wallet = async() =>
     window.metamask_signer = metamask_provider.getSigner();
 
     // Connect to the contract with metamask so its writable
-    window.btd_contract = new ethers.Contract("0xDC99B8FF05579D09759ccd69cBb876796987a99B", abi, window.metamask_signer);
+    window.btd_contract = new ethers.Contract("0xf50Bdce93597c7176706073833c8D1F04378853D", abi, window.metamask_signer);
 
     // Set how many tokens the user already holds
     get_display_balance()
