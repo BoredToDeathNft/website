@@ -3,7 +3,8 @@ const abi = [
     "function minted() public view returns (uint256)",
     "function mintPrice() public view returns (uint256)",
     "function balanceOf(address _address) public view returns (uint256)",
-    "function whiteListMint(uint16 amount, bytes32[] memory _merkleProof) public payable"
+    "function whiteListMint(uint16 amount, bytes32[] memory _merkleProof) public payable",
+    "function publicMint(uint16 amount) public payable"
 ]
 
 
@@ -63,22 +64,24 @@ const calc_price = async() =>
 
 
     // Calculate how many more free mints the user has
-    let free_mints = 2;
-    if (balance > 2)
-        free_mints = 0;
-    else
-        free = 2 - balance;
-
-    let price;
-    if (free_mints < amount)
-        price = ((amount-free_mints)*unit_price);
-    else
-        price = 0;
+    // let free_mints = 2;
+    // if (balance > 2)
+    //     free_mints = 0;
+    // else
+    //     free = 2 - balance;
+    //
+    // let price;
+    // if (free_mints < amount)
+    //     price = ((amount-free_mints)*unit_price);
+    // else
+    //     price = 0;
+    price = 0
 
     console.log('price: ',price , typeof(price));
     
     // Update the price on the popup
-    document.getElementById("popup-price").innerText = `${price/1000000000000000000}`;
+    // document.getElementById("popup-price").innerText = `${price/1000000000000000000}`;
+    document.getElementById("popup-price").innerText = `0`;
 
     return price;
 }
@@ -143,7 +146,7 @@ const mint = async(e) =>
     try
     {
         // If successful then just console log it
-        let output = await window.btd_contract.whiteListMint(amount, merkle_proof, {value: price});
+        let output = await window.btd_contract.publicMint(amount, {value: price});
         console.log('output: ',output , typeof(output));
     }
     catch
@@ -172,11 +175,11 @@ const connect_wallet = async() =>
     // Verify if the address is on the white list.
     let address = await window.metamask_signer.getAddress();
     address = address.toLowerCase()
-    if (merkle_tree.getHexProof(keccak256(address)).length == 0)
-    {
-        alert("Your address is not on the white list!");
-        return;
-    }
+    // if (merkle_tree.getHexProof(keccak256(address)).length == 0)
+    // {
+    //     alert("Your address is not on the white list!");
+    //     return;
+    // }
 
     // casual print
     console.log("Connected account: ", address);
